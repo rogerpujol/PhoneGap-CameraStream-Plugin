@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://cordova.apache.org/ns/plugins/1.0"
+    id="com.roger.plugins.camerastream"
+    version="0.0.1">
+    <name>CameraStream</name>
+
+    <js-module src="www/CameraStream.js" name="CameraStream">
+        <clobbers target="cameraStream" />
+    </js-module>
+    
+    <!-- ios -->
+    <platform name="ios">    
+        <config-file target="config.xml" parent="/*">
+            <feature name="CameraStream">
+                <param name="ios-package" value="CameraStream" /> 
+            </feature>
+        </config-file>
+
+        <header-file src="src/ios/CameraStream.h" />
+        <source-file src="src/ios/CameraStream.m" />
+        
+        <framework src="CoreVideo.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="UIKit.framework" />
+        <framework src="AVFoundation.framework" />
+    </platform>
+</plugin>
