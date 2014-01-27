@@ -4,7 +4,7 @@ var exec = require('cordova/exec');
  */
 function CameraStream() {}
 
-CameraStream.prototype.start = function() {
+CameraStream.prototype.start = function(successFunction,errorFunction) {
   exec(successFunction,errorFunction,"CameraStream","start",[]);
 };
 
