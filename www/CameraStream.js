@@ -20,4 +20,4 @@ CameraStream.prototype.start = function() {
 }
 
 var CameraStream = new CameraStream();
-module.exports = CameraStream;
+module.exports = cameraStream;
