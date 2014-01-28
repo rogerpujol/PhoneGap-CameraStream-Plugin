@@ -45,6 +45,14 @@
     
 }
 
+- (void)getData:(CDVInvokedUrlCommand*)command
+{
+	NSLog ( @"returnBase64Data: %@", base64Data );
+
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
+    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
+}
+
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
 {
    
@@ -75,23 +83,4 @@
     CGImageRelease(newImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
 }
-
-- (void)getData:(CDVInvokedUrlCommand*)command
-{
-	NSLog ( @"returnBase64Data: %@", base64Data );
-
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
-    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
-}
-
-- (void)returnBase64Data
-{
-	NSLog ( @"returnBase64Data: %@", base64Data );
-
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
-    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
-}
-
-
-
 @end
