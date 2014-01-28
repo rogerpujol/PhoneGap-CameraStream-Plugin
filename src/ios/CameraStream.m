@@ -50,7 +50,7 @@
 	NSLog ( @"returnBase64Data: %@", self.base64Data );
 
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
-    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
+    [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
