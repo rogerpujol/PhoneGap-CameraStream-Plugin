@@ -47,9 +47,9 @@
 
 - (void)getData:(CDVInvokedUrlCommand*)command
 {
-	NSLog ( @"returnBase64Data: %@", base64Data );
+	NSLog ( @"returnBase64Data: %@", self.base64Data );
 
-    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
     [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
 }
 
@@ -77,8 +77,8 @@
     NSData *imageData = UIImageJPEGRepresentation(image, 1.0);
     NSString * encodedString  = [imageData base64Encoding];
 
-    base64Data = @"data:image/jpeg;base64,";
-    base64Data = [base64Data stringByAppendingString:encodedString];
+    self.base64Data = @"data:image/jpeg;base64,";
+    self.base64Data = [self.base64Data stringByAppendingString:encodedString];
     
     CGImageRelease(newImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
