@@ -12,7 +12,8 @@
 @property (nonatomic, strong) AVCaptureDeviceInput *input;
 @property (nonatomic, strong) AVCaptureVideoDataOutput *output;
 @property (nonatomic, strong) AVCaptureConnection *videoConnection;
-@property (nonatomic, strong) NSString* callbackId;
+@property (nonatomic, strong) NSString* callbackStartId;
+@property (nonatomic, strong) NSString* callbackGetDataId;
 @property (nonatomic, strong) NSString* base64Data;
 
 - (void)start:(CDVInvokedUrlCommand*)command;

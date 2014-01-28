@@ -3,13 +3,13 @@
 
 @implementation CameraStream
 
-@synthesize callbackId,base64Data;
+@synthesize callbackStartId,callbackGetDataId,base64Data;
 
 - (void)start:(CDVInvokedUrlCommand*)command
 {
 
 	NSArray* arguments = command.arguments;
-	self.callbackId = command.callbackId;
+	self.callbackStartId = command.callbackId;
 
 	// Create an acceleration object
     NSMutableDictionary* messageProps = [NSMutableDictionary dictionaryWithCapacity:3];
@@ -46,11 +46,8 @@
 }
 
 - (void)getData:(CDVInvokedUrlCommand*)command
-{
-    [self.commandDelegate runInBackground:^{
-        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
-        [self.commandDelegate sendPluginResult:result callbackId:command.callbackId];   
-    }];
+{   
+    self.callbackGetDataId = command.callbackId;
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
@@ -82,5 +79,10 @@
     
     CGImageRelease(newImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
+
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
+        [self.commandDelegate sendPluginResult:result callbackId:self.callbackGetDataId];   
+    }];
 }
 @end
