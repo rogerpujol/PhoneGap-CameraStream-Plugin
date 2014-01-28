@@ -48,6 +48,10 @@
 - (void)getData:(CDVInvokedUrlCommand*)command
 {   
     self.callbackGetDataId = command.callbackId;
+    [self.commandDelegate runInBackground:^{
+        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
+        [self.commandDelegate sendPluginResult:result callbackId:self.callbackGetDataId];   
+    }];
 }
 
 - (void)captureOutput:(AVCaptureOutput *)captureOutput didOutputSampleBuffer:(CMSampleBufferRef)sampleBuffer fromConnection:(AVCaptureConnection *)connection
@@ -79,10 +83,5 @@
     
     CGImageRelease(newImage);
     CVPixelBufferUnlockBaseAddress(imageBuffer,0);
-
-    [self.commandDelegate runInBackground:^{
-        CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:self.base64Data];
-        [self.commandDelegate sendPluginResult:result callbackId:self.callbackGetDataId];   
-    }];
 }
 @end
