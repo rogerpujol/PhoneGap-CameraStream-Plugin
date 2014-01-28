@@ -78,7 +78,10 @@
 
 - (void)getData:(CDVInvokedUrlCommand*)command
 {
-	[self returnBase64Data];
+	NSLog ( @"returnBase64Data: %@", base64Data );
+
+    CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
+    [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
 }
 
 - (void)returnBase64Data
@@ -86,7 +89,6 @@
 	NSLog ( @"returnBase64Data: %@", base64Data );
 
     CDVPluginResult* result = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:base64Data];
-    [result setKeepCallback:[NSNumber numberWithBool:YES]];
     [self.commandDelegate sendPluginResult:result callbackId:self.callbackId];
 }
 
