@@ -3,7 +3,7 @@
 
 @implementation CameraStream
 
-@synthesize callbackId,encodedString;
+@synthesize callbackId,base64Data;
 
 - (void)start:(CDVInvokedUrlCommand*)command
 {
